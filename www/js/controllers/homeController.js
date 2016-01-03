@@ -7,6 +7,14 @@
  * # HomeController
  */
 angular.module('MyApp')
-  .controller('HomeController', function($scope) {
+  .controller('HomeController', function($scope, $state, $ionicHistory) {
+    $scope.goToDeliverPage = function() {
+      $ionicHistory.nextViewOptions({
+        disableBack: true,
+        disableAnimate: true,
+        historyRoot: true
+      });
 
+      $state.go('app.deliver');
+    };
   });

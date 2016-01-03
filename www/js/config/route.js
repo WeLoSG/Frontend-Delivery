@@ -22,6 +22,16 @@ angular.module('MyApp')
         }
       }
     })
+    .state('app.deliver', {
+      url: '/deliver',
+      cache: true,
+      views: {
+        'viewContent': {
+          templateUrl: 'templates/views/deliver.html',
+          controller: 'DeliverController'
+        }
+      }
+    })
     .state('app.account', {
       url: '/account',
       cache: true,
