@@ -1,0 +1,37 @@
+.deliver-main {
+  .bar-header {
+    height: 50px;
+  }
+  .segmented-button {
+    justify-content: center;
+
+    .button {
+      flex: 0.3;
+      border-radius: 0px;
+      border-color: white;
+      background-color: $theme-base;
+      color:white;
+      &.active {
+        color:$theme-base;
+        background-color: $theme-secondary;
+      }
+    }
+  }
+
+  $mapHeight: 92%;
+
+  map {
+    display: block;
+    width: 100%;
+    height: $mapHeight;
+  }
+
+  .bar-footer {
+    height: calc(100% - #{$mapHeight});
+    font-size: 14px;
+    background-color: $theme-secondary;
+    border-color: 1px solid red;
+    text-align: center;
+    width: 100%;
+  }
+}
