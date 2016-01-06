@@ -14,6 +14,8 @@ angular.module('MyApp')
         onCreate: '&'
       },
       link: function($scope, $element, $attr) {
+        $element.attr('data-tap-disabled', 'true');
+
         function initialize() {
           var mapOptions = {
             center: new google.maps.LatLng(1.352083, 103.819836),
