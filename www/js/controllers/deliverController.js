@@ -142,7 +142,7 @@ angular.module('MyApp')
 
       // retrieve location every 10 seconds
       var options = {
-        enableHighAccuracy: true
+        enableHighAccuracy: false
       };
       navigator.geolocation.watchPosition(success, error, options);
     }
