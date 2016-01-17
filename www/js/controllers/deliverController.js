@@ -8,7 +8,7 @@
  */
 angular.module('MyApp')
   .controller('DeliverController', function($scope, $ionicLoading, socket,
-    OrderService) {
+    OrderService, $compile) {
 
     $scope.markers = [];
     $scope.orders = [];
@@ -21,8 +21,34 @@ angular.module('MyApp')
       noSupress: true
     });
 
+    function generateInoWindowContent(orderData) {
+      var fromAddress = orderData.fromAddress;
+      var toAddress = orderData.toAddress;
+      var type = orderData.orderType;
+      if (type === 0) {
+        type = 'Document';
+      } else if (type === 1) {
+        type = 'Small Parcel';
+      } else if (type === 2) {
+        type = 'Medium Parcel';
+      } else if (type === 3) {
+        type = 'Large Parcel';
+      }
+      return '<div id="info-main">' +
+        '<p id="parcel-type">' + type + '</p>' +
+        '<p><h5>From:</h5>' + fromAddress.extra + ', ' +
+        fromAddress.street +
+        ', ' + fromAddress.postal + '</p>' +
+        '<p><h5>From:</h5>' + toAddress.extra + ', ' + toAddress.street +
+        ', ' + toAddress.postal + '</p>' +
+        '<div><button class="button button-block button-positive" ' +
+        'ng-click="deliverOrder(\'' + orderData.order_number +
+        '\')">Deliver</button>' +
+        '</div>';
+    }
+
     // Adds a marker to the map and push to the array.
-    function addMarker(location, type) {
+    function addMarker(entry, type) {
       var iconUsed = type === 'me' ? {
         url: 'img/icon_deliver.png', // url
         scaledSize: new google.maps.Size(32, 32),
@@ -35,21 +61,37 @@ angular.module('MyApp')
         anchor: new google.maps.Point(16, 16)
       };
 
-      var marker = new google.maps.Marker({
-        position: location,
-        map: $scope.map,
-        icon: iconUsed
-      });
+      var marker;
+      if (type !== 'me') { // orders marker
+        var location = new google.maps.LatLng(
+          entry.location.coordinates[1],
+          entry.location.coordinates[0]
+        );
+        marker = new google.maps.Marker({
+          position: location,
+          map: $scope.map,
+          icon: iconUsed,
+          data: entry
+        });
 
-      if (type !== 'me') {
+        var infoWindowElement = generateInoWindowContent(marker.data);
+        var compiled = $compile(infoWindowElement)($scope);
+
         marker.addListener('click', function() {
+          $scope.infoWindow.setContent(compiled[0]);
           $scope.infoWindow.open($scope.map, marker);
         });
         marker.addListener('mousedown', function() {
+          $scope.infoWindow.setContent(compiled[0]);
           $scope.infoWindow.open($scope.map, marker);
         });
         $scope.markers.push(marker);
       } else {
+        marker = new google.maps.Marker({
+          position: entry,
+          map: $scope.map,
+          icon: iconUsed
+        });
         $scope.currentMarker = marker; // update current marker
       }
     }
@@ -60,10 +102,7 @@ angular.module('MyApp')
           $scope.markers = []; // clear cached markers
           $scope.orders = data; // reset orders data on map
           data.forEach(function(entry) {
-            addMarker(new google.maps.LatLng(
-              entry.location.coordinates[1],
-              entry.location.coordinates[0]
-            ));
+            addMarker(entry);
           });
         })
         .error(function(error) {
@@ -126,6 +165,10 @@ angular.module('MyApp')
         console.log('Unable to get location: ' + error.message);
         $ionicLoading.hide();
       });
+    };
+
+    $scope.deliverOrder = function(order) {
+      console.log(order);
     };
 
     // register position watch event
