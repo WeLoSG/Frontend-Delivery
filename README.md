@@ -24,12 +24,15 @@ Recommend [Atom](https://atom.io/) with following package installed:
   `sudo npm install -g cordova`
 
   `sudo npm install -g ionic`
+  
+  `sudo npm install -g gulp`
 
   `npm install`
 
   `bower install`
 
-3. To start:
+3. Install [SASS](http://sass-lang.com/install)
+4. To start:
 `ionic serve`
 
 ### Development
