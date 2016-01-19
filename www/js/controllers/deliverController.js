@@ -8,7 +8,7 @@
  */
 angular.module('MyApp')
   .controller('DeliverController', function($scope, $ionicLoading, socket,
-    OrderService, $compile) {
+    OrderService, $compile, $ionicPopup, $state) {
 
     $scope.markers = [];
     $scope.orders = [];
@@ -167,13 +167,26 @@ angular.module('MyApp')
       });
     };
 
-    $scope.deliverOrder = function(order) {
-      console.log(order);
+    $scope.deliverOrder = function(orderId) {
+      var confirmPopup = $ionicPopup.confirm({
+        title: 'Start Deliver Order',
+        template: 'Are you sure you want to deliver this order?'
+      });
+
+      confirmPopup.then(function(res) {
+        if (res) {
+          $state.go('app.confirmOrder', {
+            orderId: orderId
+          });
+        }
+      });
+
     };
 
     // register position watch event
     // !! only work on a real device !!
     function registerWatchLocation() {
+      // may need to send location to the server
       function success(pos) {
         $scope.currentLocation = pos;
         updateMyLocation(pos);

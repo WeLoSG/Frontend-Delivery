@@ -32,6 +32,16 @@ angular.module('MyApp')
         }
       }
     })
+    .state('app.confirmOrder', {
+      url: '/confirmOrder/:orderId',
+      cache: true,
+      views: {
+        'viewContent': {
+          templateUrl: 'templates/views/confirmOrder.html',
+          controller: 'ConfirmOrderController'
+        }
+      }
+    })
     .state('app.account', {
       url: '/account',
       cache: true,
