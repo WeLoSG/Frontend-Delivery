@@ -14,7 +14,7 @@
     </div>
     <div class="order-infos">
       <div class="order-id">
-        OrderRef: {{order.order_number}}
+        OrderRef: {{order.orderId}}
       </div>
       <div class="order-price">
         S${{order.amount}}
@@ -24,7 +24,7 @@
           PickUp From
         </div>
         <div class="name">
-          {{order.created_by}}
+          {{order.contactName}}
         </div>
         <div class="call">
           <img src="img/call.svg" alt="Contact now">

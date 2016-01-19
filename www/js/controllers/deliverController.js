@@ -42,7 +42,7 @@ angular.module('MyApp')
         '<p><h5>From:</h5>' + toAddress.extra + ', ' + toAddress.street +
         ', ' + toAddress.postal + '</p>' +
         '<div><button class="button button-block button-positive" ' +
-        'ng-click="deliverOrder(\'' + orderData.order_number +
+        'ng-click="deliverOrder(\'' + orderData.orderId +
         '\')">Deliver</button>' +
         '</div>';
     }
@@ -156,7 +156,7 @@ angular.module('MyApp')
         var myLocation = new google.maps.LatLng(pos.coords.latitude,
           pos.coords.longitude);
         $scope.map.setCenter(myLocation);
-        $scope.map.setZoom(15);
+        $scope.map.setZoom(16);
 
         addMarker(myLocation, 'me');
 

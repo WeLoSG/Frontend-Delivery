@@ -8,7 +8,7 @@
  */
 angular.module('MyApp')
   // use factory for services
-  .factory('OrderService', function($http, ApiService) {
+  .factory('OrderService', function($http, ApiService, $sessionStorage) {
     var getOrders = function(locations) {
       return $http({
         url: ApiService.getEndpoint() + '/orders',
@@ -27,13 +27,22 @@ angular.module('MyApp')
       });
     };
 
+    var getOrdersForUser = function(userId) {
+      return $http({
+        url: ApiService.getEndpoint() + '/orders/deliver/' + userId,
+        method: 'GET'
+      });
+    };
+
     var updateOrderStatus = function(orderId, operation, action, value) {
+      var deliverId = $sessionStorage.get('userid');
       return $http({
         url: ApiService.getEndpoint() + '/orders/' + orderId,
         data: {
           op: operation,
           action: action,
-          value: value
+          value: value,
+          deliverId: deliverId
         },
         method: 'PATCH'
       });
@@ -43,6 +52,7 @@ angular.module('MyApp')
     return {
       getOrder: getOrder,
       getOrders: getOrders,
+      getOrdersForUser: getOrdersForUser,
       updateOrderStatus: updateOrderStatus
     };
 

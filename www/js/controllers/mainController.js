@@ -18,6 +18,6 @@ angular.module('MyApp')
     }
 
     if (!$sessionStorage.get('userid', null)) {
-      $sessionStorage.set('userid', guid());
+      $sessionStorage.set('userid', 'testuser');
     }
   });

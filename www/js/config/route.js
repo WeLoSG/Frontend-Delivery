@@ -52,13 +52,13 @@ angular.module('MyApp')
         }
       }
     })
-    .state('app.settings', {
-      url: '/settings',
+    .state('app.tasks', {
+      url: '/tasks',
       cache: true,
       views: {
         'viewContent': {
-          templateUrl: 'templates/views/settings.html',
-          controller: 'SettingsController'
+          templateUrl: 'templates/views/tasks.html',
+          controller: 'TasksController'
         }
       }
     });

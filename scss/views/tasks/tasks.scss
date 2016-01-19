@@ -1,0 +1,41 @@
+.tasks-main {
+  .order-id {
+    padding-left: 0px;
+  }
+
+  .price {
+    text-align: right;
+  }
+
+  .category {
+    margin-bottom: 12px;
+    .title {
+      font-size: 13px;
+    }
+
+    .detail {
+      font-size: 16px;
+    }
+  }
+
+  .address {
+    margin-bottom: 12px;
+    .title {
+      font-size: 13px;
+    }
+
+    .detail {
+      font-size: 16px;
+    }
+  }
+
+  .status-orange {
+    color: #FDAF0B;
+  }
+  .status-green {
+    color: #7DBF31;
+  }
+  .status-red {
+    color: #B01522;
+  }
+}

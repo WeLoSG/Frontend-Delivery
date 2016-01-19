@@ -1,0 +1,57 @@
+<ion-view>
+  <ion-header-bar align-title="center" class="bar-positive">
+    <button class="button button-icon icon ion-navicon" menu-toggle="left"></button>
+    <h1 class="title">Tasks</h1>
+  </ion-header-bar>
+
+  <ion-content class="tasks-main">
+    <div class="card" ng-repeat="order in orders">
+      <div class="item item-divider">
+        <div class="row">
+          <div class="col col-50 order-id" ng-class="{'status-orange' : order.status == 1,
+                      'status-red' : order.status == 2,
+                      'status-blue' : order.status > 2}">
+            {{order.currentStatus}}
+          </div>
+          <div class="col col-50 price">
+            S${{order.amount}}
+          </div>
+        </div>
+      </div>
+      <div class="item item-text-wrap">
+        <div class="address">
+          <div class="title">
+            From
+          </div>
+          <div class="detail">
+            {{order.fromAddress.extra}}, {{order.fromAddress.street}}, {{order.fromAddress.postal}}
+          </div>
+        </div>
+        <div class="address">
+          <div class="title">
+            To
+          </div>
+          <div class="detail">
+            {{order.toAddress.extra}}, {{order.toAddress.street}}, {{order.toAddress.postal}}
+          </div>
+        </div>
+        <div class="category">
+          <div class="title">
+            Parcel Type
+          </div>
+          <div class="detail">
+            {{order.category}}
+          </div>
+        </div>
+      </div>
+      <div class="item item-divider">
+        <div class="button-bar">
+          <a class="button">Operation 1</a>
+          <a class="button">Operation 2</a>
+          <a class="button">Operation 3</a>
+        </div>
+      </div>
+    </div>
+  </ion-content>
+
+</ion-view>
