@@ -12,8 +12,8 @@ angular.module('MyApp')
 
     $scope.markers = [];
     $scope.orders = [];
-    $scope.currentMarker = null;
-    $scope.currentLocation = null;
+    $scope.currentMarker = null; // my marker
+    $scope.currentLocation = null; // my location
 
     // Shared info window
     $scope.infoWindow = new google.maps.InfoWindow({
@@ -35,7 +35,7 @@ angular.module('MyApp')
         type = 'Large Parcel';
       }
       return '<div id="info-main">' +
-        '<p id="parcel-type">' + type + '</p>' +
+        '<p id="parcel-type">' + type + ' - S$' + orderData.amount + '</p>' +
         '<p><h5>From:</h5>' + fromAddress.extra + ', ' +
         fromAddress.street +
         ', ' + fromAddress.postal + '</p>' +
@@ -76,7 +76,7 @@ angular.module('MyApp')
 
         var infoWindowElement = generateInoWindowContent(marker.data);
         var compiled = $compile(infoWindowElement)($scope);
-
+        $scope.markers.push(marker);
         marker.addListener('click', function() {
           $scope.infoWindow.setContent(compiled[0]);
           $scope.infoWindow.open($scope.map, marker);
@@ -85,7 +85,7 @@ angular.module('MyApp')
           $scope.infoWindow.setContent(compiled[0]);
           $scope.infoWindow.open($scope.map, marker);
         });
-        $scope.markers.push(marker);
+
       } else {
         marker = new google.maps.Marker({
           position: entry,
@@ -96,10 +96,17 @@ angular.module('MyApp')
       }
     }
 
+    $scope.clearOverlays = function() {
+      for (var i = 0; i < $scope.markers.length; i++) {
+        $scope.markers[i].setMap(null);
+      }
+      $scope.markers.length = 0;
+    };
+
     function getOrders(location) {
       OrderService.getOrders(location)
         .success(function(data) {
-          $scope.markers = []; // clear cached markers
+          $scope.clearOverlays(); // clear cached markers
           $scope.orders = data; // reset orders data on map
           data.forEach(function(entry) {
             addMarker(entry);
@@ -175,13 +182,27 @@ angular.module('MyApp')
 
       confirmPopup.then(function(res) {
         if (res) {
+          $scope.clearOverlays(); // clear cached markers
+          $scope.infoWindow.close();
           $state.go('app.confirmOrder', {
             orderId: orderId
           });
         }
       });
-
     };
+
+    $scope.$on('$ionicView.afterEnter', function() {
+      // get orders around me
+      if (!$scope.currentLocation) {
+        return;
+      }
+      var geoLocation = {
+        lat: $scope.currentLocation.coords.latitude,
+        lng: $scope.currentLocation.coords.longitude
+      };
+      centerMyLocation();
+      getOrders(geoLocation);
+    });
 
     // register position watch event
     // !! only work on a real device !!
@@ -189,18 +210,20 @@ angular.module('MyApp')
       // may need to send location to the server
       function success(pos) {
         $scope.currentLocation = pos;
-        updateMyLocation(pos);
       }
 
       function error(err) {
         console.warn('ERROR(' + err.code + '): ' + err.message);
       }
 
-      // retrieve location every 10 seconds
       var options = {
-        enableHighAccuracy: false
+        enableHighAccuracy: true
       };
       navigator.geolocation.watchPosition(success, error, options);
+
+      setInterval(function() {
+        updateMyLocation($scope.currentLocation); // get data every 30 seconds
+      }, 30 * 1000);
     }
 
     socket.on('connect', function() {

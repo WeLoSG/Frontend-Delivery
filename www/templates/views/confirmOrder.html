@@ -8,7 +8,86 @@
     </ion-nav-title>
   </ion-nav-bar>
 
-  <ion-content>
+  <ion-content class="confirmOrder-main">
+    <div class="banner">
+      You got the job.
+    </div>
+    <div class="order-infos">
+      <div class="order-id">
+        OrderRef: {{order.order_number}}
+      </div>
+      <div class="order-price">
+        S${{order.amount}}
+      </div>
+      <div class="from">
+        <div class="title">
+          PickUp From
+        </div>
+        <div class="name">
+          {{order.created_by}}
+        </div>
+        <div class="call">
+          <img src="img/call.svg" alt="Contact now">
+        </div>
+
+      </div>
+      <div class="address">
+        <div class="title">
+          PickUp
+        </div>
+        <div class="detail">
+          <div>
+            {{order.fromAddress.extra}}
+          </div>
+          <div>
+            {{order.fromAddress.street}}, {{order.fromAddress.postal}}
+          </div>
+        </div>
+      </div>
+      <div class="address">
+        <div class="title">
+          Deliver
+        </div>
+        <div class="detail">
+          <div>
+            {{order.toAddress.extra}}
+          </div>
+          <div>
+            {{order.toAddress.street}}, {{order.toAddress.postal}}
+          </div>
+        </div>
+      </div>
+      <div class="field">
+        <div class="title">
+          Parcel Type
+        </div>
+        <div class="name">
+          {{order.orderType}}
+        </div>
+      </div>
+      <div class="field">
+        <div class="title">
+          Comments
+        </div>
+        <div class="name">
+          {{order.comments}}
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <div class="row no-padding">
+        <div class="col col-50 no-padding">
+          <button class="button footer-button-left button-square button-positive">
+            VIEW MY TASK
+          </button>
+        </div>
+        <div class="col col-50 no-padding">
+          <button class="button footer-button-right button-square button-positive">
+            UPDATE MY TASK
+          </button>
+        </div>
+      </div>
+    </div>
 
   </ion-content>
 

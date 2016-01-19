@@ -1,0 +1,90 @@
+.confirmOrder-main {
+
+  .banner {
+    padding: 20px;
+    font-size: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+    background-color: #C3C6CD;
+  }
+
+  .order-infos {
+    padding: 0px 40px;
+
+    .order-id {
+      font-size: 24px;
+    }
+    .order-price {
+      margin-top: 20px;
+      color: #184CC9;
+      font-size: 20px;
+    }
+
+    .from {
+      margin-top: 20px;
+      width: 100%;
+      .title {
+        color: grey;
+      }
+      .name {
+        color: #0F7BBC;
+        font-size: 26px;
+        float: left;
+        width: 80%;
+      }
+      .call {
+        color: #0F7BBC;
+        font-size: 26px;
+        float: left;
+        width: 20%;
+        text-align: center;
+        img  {
+          height: 21px;
+        }
+      }
+
+      &:after {
+          content:'';
+          display:block;
+          clear: both;
+      }
+    }
+
+    .address {
+      margin-top: 20px;
+      .title {
+        color: grey;
+      }
+      .detail {
+        font-size: 22px;
+      }
+    }
+
+    .field {
+      margin-top: 20px;
+      .title {
+        color: grey;
+      }
+      .name {
+        font-size: 22px;
+      }
+    }
+  }
+
+  .footer {
+     position:fixed;
+     bottom:0;
+     width: 100%;
+
+     .footer-button-left {
+       width: 100%;
+       height: 50px;
+       background-color: #FDAF0B;
+     }
+     .footer-button-right {
+       width: 100%;
+       height: 50px;
+       background-color: #7DBF31;
+     }
+  }
+}

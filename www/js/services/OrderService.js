@@ -9,7 +9,7 @@
 angular.module('MyApp')
   // use factory for services
   .factory('OrderService', function($http, ApiService) {
-    var getOrder = function(locations) {
+    var getOrders = function(locations) {
       return $http({
         url: ApiService.getEndpoint() + '/orders',
         params: {
@@ -20,9 +20,30 @@ angular.module('MyApp')
       });
     };
 
+    var getOrder = function(orderId) {
+      return $http({
+        url: ApiService.getEndpoint() + '/orders/' + orderId,
+        method: 'GET'
+      });
+    };
+
+    var updateOrderStatus = function(orderId, operation, action, value) {
+      return $http({
+        url: ApiService.getEndpoint() + '/orders/' + orderId,
+        data: {
+          op: operation,
+          action: action,
+          value: value
+        },
+        method: 'PATCH'
+      });
+    };
+
     // public api
     return {
-      getOrders: getOrder
+      getOrder: getOrder,
+      getOrders: getOrders,
+      updateOrderStatus: updateOrderStatus
     };
 
   });
