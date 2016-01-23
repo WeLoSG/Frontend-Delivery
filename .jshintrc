@@ -18,7 +18,7 @@
   "smarttabs": true,
   "white": false,
   "expr": true,
-  "predef": ["google", "io"],
+  "predef": ["google", "io", "CryptoJS"],
   "globals": {
     "angular": false,
     "jQuery": false,

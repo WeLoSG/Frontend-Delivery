@@ -7,17 +7,17 @@
  * # MainController
  */
 angular.module('MyApp')
-  .controller('MainController', function($scope, $sessionStorage) {
-    // init user id if not existed
-    function guid() {
-      function s4() {
-        return Math.floor((1 + Math.random()) * 0x10000)
-          .toString(16).substring(1);
+  .controller('MainController', function($scope, $localStorage, $state,
+    $ionicHistory) {
+    $scope.$on('$ionicView.enter', function() {
+      $ionicHistory.nextViewOptions({
+        historyRoot: true,
+        disableAnimate: true,
+        disableBack: true
+      });
+      if (!$localStorage.get('token') && !$state.includes('app.register') &&
+        !$state.includes('app.login')) {
+        $state.go('app.login');
       }
-      return s4() + s4() + '-' + s4() + '-' + s4() + s4();
-    }
-
-    if (!$sessionStorage.get('userid', null)) {
-      $sessionStorage.set('userid', 'testuser');
-    }
+    });
   });
