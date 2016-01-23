@@ -7,7 +7,7 @@
  * # $localstorage
  */
 angular.module('MyApp')
-  .factory('$localstorage', function($window) {
+  .factory('$localStorage', function($window) {
     return {
       set: function(key, value) {
         $window.localStorage[key] = value;
@@ -20,6 +20,9 @@ angular.module('MyApp')
       },
       getObject: function(key) {
         return JSON.parse($window.localStorage[key] || '{}');
+      },
+      remove: function(key) {
+        $window.localStorage.removeItem(key);
       }
     };
   });

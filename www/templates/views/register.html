@@ -1,0 +1,55 @@
+<ion-view>
+    <ion-header-bar align-title="center" class="bar-positive">
+    	<h1 class="title">Register</h1>
+    </ion-header-bar>
+	<ion-content class="register-sub-header padding">
+		<div class="register-main">
+			<div class="register-main-title">
+				<i class="icon ion-person title-icon"></i>
+			</div>
+		</div>
+		<ion-list class="list-inset">
+    		<div class="item item item-icon-left">
+    			<i class="icon ion-email"></i>
+    			<input type="text" placeholder="Email Address" ng-model="registration.email">
+  			</div>
+  			<div class="item item item-icon-left">
+  				<i class="icon ion-person"></i>
+    			<input type="text" placeholder="Name" ng-model="registration.name">
+  			</div>
+        <div class="item item item-icon-left">
+  				<i class="icon ion-ios-body"></i>
+    			<input type="text" placeholder="NRIC / FIN" ng-model="registration.ic">
+  			</div>
+		</ion-list>
+		<br/>
+		<ion-list class="list-inset">
+    		<div class="item item item-icon-left">
+    			<i class="icon ion-locked"></i>
+    			<input type="password" placeholder="Password" ng-model="registration.password">
+  			</div>
+  			<div class="item item item-icon-left">
+  				<i class="icon ion-locked"></i>
+    			<input type="password" placeholder="Retype Password" ng-model="registration.repassword">
+  			</div>
+		</ion-list>
+		<br/>
+		<ion-list class="list-inset">
+      <div class="item item item-icon-left">
+        <i class="icon ion-android-car"></i>
+        <input type="text" placeholder="Vehice number" ng-model="registration.vehiceNumber">
+      </div>
+      <div class="item item item-icon-left">
+        <i class="icon ion-ios-box"></i>
+        <input type="text" placeholder="Driving license" ng-model="registration.drivingLicense">
+      </div>
+    		<div class="item item item-icon-left">
+    			<i class="icon ion-ios-telephone"></i>
+    			<input type="text" placeholder="Contact" ng-model="registration.contact">
+  			</div>
+		</ion-list>
+
+		<button class="button button-block button-calm" ng-click="userRegister()">Register</button>
+		<button class="button button-block button-assertive" ui-sref="app.login">Cancel</button>
+	</ion-content>
+</ion-view>

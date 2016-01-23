@@ -1,0 +1,32 @@
+.register-sub-header {
+	width: 100%;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	background: $positive;
+
+	.register-main {
+		.register-main-title {
+		    font-size: 1.8em;
+		    color: white;
+        margin: 10%;
+        
+		    .title-icon {
+		    	font-size: 3em;
+		    }
+  		}
+
+  		.button {
+		    width: 80%;
+		    height: 80px;
+		    font-size: 1.5em;
+		    background-color: $theme-secondary;
+		    margin-top: 30px;
+
+	    	&.activate, &.activated {
+	    		background-color: $theme-secondary-active;
+	    	}
+  		}
+	}
+}

@@ -1,0 +1,33 @@
+<ion-view>
+    <ion-header-bar align-title="center" class="bar-positive">
+    </ion-header-bar>
+	<ion-content class="login-main padding">
+		<div class="login-sub-header">
+			<div class="login-main-title">
+				<img src="img/logo.png" alt="" />
+				<div class="">
+				  Crowdsourced Logistic
+				</div>
+			</div>
+		</div>
+		<ion-list class="list-inset">
+    		<div class="item item item-icon-left">
+    			<i class="icon ion-email"></i>
+    			<input type="text" placeholder="Email Address" ng-model="credential.email">
+  			</div>
+  			<div class="item item item-icon-left">
+  				<i class="icon ion-locked"></i>
+    			<input type="password" placeholder="Password" ng-model="credential.password">
+  			</div>
+		</ion-list>
+    <div class="button-full-group">
+      <button class="button button-block button-calm" ng-click="userLogin()">SIGN IN</button>
+  		<button class="button button-block button-dark">Forget Password</button>
+    </div>
+    <hr>
+    <div class="button-group">
+      <div><a class="button icon-left ion-social-facebook button-royal">Login with Facebook</a></div>
+      <div><a class="button icon-right ion-chevron-right button-dark" ui-sref="app.register">Register Now</a></div>
+    </div>
+	</ion-content>
+</ion-view>
