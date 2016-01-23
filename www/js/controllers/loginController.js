@@ -36,4 +36,15 @@ angular.module('MyApp')
           console.log(error);
         });
     };
+
+    $scope.$on('$ionicView.beforeEnter', function() {
+      $ionicHistory.nextViewOptions({
+        historyRoot: true,
+        disableAnimate: true,
+        disableBack: true
+      });
+      if ($localStorage.get('token')) {
+        $state.go('app.home');
+      }
+    });
   });

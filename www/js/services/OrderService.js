@@ -8,13 +8,15 @@
  */
 angular.module('MyApp')
   // use factory for services
-  .factory('OrderService', function($http, ApiService, $sessionStorage) {
+  .factory('OrderService', function($http, ApiService, $localStorage) {
+    var token = $localStorage.get('token');
     var getOrders = function(locations) {
       return $http({
         url: ApiService.getEndpoint() + '/orders',
         params: {
           lat: locations.lat,
-          lng: locations.lng
+          lng: locations.lng,
+          welo_token: token
         },
         method: 'GET'
       });
@@ -23,26 +25,33 @@ angular.module('MyApp')
     var getOrder = function(orderId) {
       return $http({
         url: ApiService.getEndpoint() + '/orders/' + orderId,
+        params: {
+          welo_token: token
+        },
         method: 'GET'
       });
     };
 
     var getOrdersForUser = function(userId) {
       return $http({
-        url: ApiService.getEndpoint() + '/orders/deliver/' + userId,
+        url: ApiService.getEndpoint() + '/orders/deliver',
+        params: {
+          welo_token: token
+        },
         method: 'GET'
       });
     };
 
     var updateOrderStatus = function(orderId, operation, action, value) {
-      var deliverId = $sessionStorage.get('userid');
       return $http({
         url: ApiService.getEndpoint() + '/orders/' + orderId,
         data: {
           op: operation,
           action: action,
-          value: value,
-          deliverId: deliverId
+          value: value
+        },
+        params: {
+          welo_token: token
         },
         method: 'PATCH'
       });
