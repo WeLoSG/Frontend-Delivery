@@ -42,11 +42,10 @@ angular.module('MyApp')
       });
     };
 
-    var updateOrderStatus = function(orderId, operation, action, value) {
+    var updateOrderStatus = function(orderId, action, value) {
       return $http({
         url: ApiService.getEndpoint() + '/orders/' + orderId,
         data: {
-          op: operation,
           action: action,
           value: value
         },
