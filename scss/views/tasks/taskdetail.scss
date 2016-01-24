@@ -1,16 +1,10 @@
-.confirmOrder-main {
+.taskdetail-main {
 
-  .banner {
-    padding: 20px;
-    font-size: 20px;
-    margin-bottom: 20px;
-    width: 100%;
-    background-color: #C3C6CD;
-  }
+  padding: 20px 0px;
 
   .order-infos {
     min-height: 480px;
-    padding: 0px 40px;
+    padding: 0px 20px;
 
     .order-id {
       font-size: 24px;
@@ -19,6 +13,21 @@
       margin-top: 20px;
       color: #184CC9;
       font-size: 20px;
+    }
+
+    .status {
+      margin-top: 20px;
+      font-size: 20px;
+    }
+
+    .status-orange {
+      color: #FDAF0B;
+    }
+    .status-green {
+      color: #7DBF31;
+    }
+    .status-red {
+      color: #B01522;
     }
 
     .from {
@@ -78,16 +87,10 @@
 
   .footer {
      width: 100%;
-
-     .footer-button-left {
-       width: 100%;
-       height: 50px;
-       background-color: #FDAF0B;
-     }
-     .footer-button-right {
-       width: 100%;
-       height: 50px;
-       background-color: #7DBF31;
+      margin-top: 20px;
+     .button-confirm {
+       color: white;
+       background-color: #387ef5;
      }
   }
 }

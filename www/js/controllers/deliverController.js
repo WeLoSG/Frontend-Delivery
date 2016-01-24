@@ -8,7 +8,7 @@
  */
 angular.module('MyApp')
   .controller('DeliverController', function($scope, $ionicLoading, socket,
-    OrderService, $compile, $ionicPopup, $state) {
+    OrderService, $compile, $ionicPopup, $state, $localStorage) {
 
     $scope.markers = [];
     $scope.orders = [];
@@ -34,13 +34,27 @@ angular.module('MyApp')
       } else if (type === 3) {
         type = 'Large Parcel';
       }
+
+      if (!fromAddress.extra) {
+        fromAddress.extra = '';
+      } else {
+        fromAddress.extra = fromAddress.extra + ', ';
+      }
+      if (!toAddress.extra) {
+        toAddress.extra = '';
+      } else {
+        toAddress.extra = toAddress.extra + ', ';
+      }
+
+      var fromAddress = '<p><h5>From:</h5>' +
+        fromAddress.extra + fromAddress.street +
+        ', ' + fromAddress.postal + '</p>';
+      var toAddress = '<p><h5>To:</h5>' + toAddress.extra + toAddress.street +
+        ', ' + toAddress.postal + '</p>';
+
       return '<div id="info-main">' +
         '<p id="parcel-type">' + type + ' - S$' + orderData.amount + '</p>' +
-        '<p><h5>From:</h5>' + fromAddress.extra + ', ' +
-        fromAddress.street +
-        ', ' + fromAddress.postal + '</p>' +
-        '<p><h5>From:</h5>' + toAddress.extra + ', ' + toAddress.street +
-        ', ' + toAddress.postal + '</p>' +
+        fromAddress + toAddress +
         '<div><button class="button button-block button-positive" ' +
         'ng-click="deliverOrder(\'' + orderData.orderId +
         '\')">Deliver</button>' +
@@ -184,12 +198,37 @@ angular.module('MyApp')
         if (res) {
           $scope.clearOverlays(); // clear cached markers
           $scope.infoWindow.close();
-          $state.go('app.confirmOrder', {
-            orderId: orderId
-          });
+          $scope.confirmDeliverOrder(orderId);
         }
       });
     };
+
+    $scope.confirmDeliverOrder = function(orderId) {
+      OrderService.updateOrderStatus(orderId, 'confirm', 1)
+        .success(function(data) {
+          $localStorage.setObject('confirmedDeliverOrder', data);
+          $state.go('app.confirmOrder');
+        })
+        .error(function(error) {
+          // display alert
+          $scope.showAlert = function() {
+            var alertPopup = $ionicPopup.alert({
+              title: 'Oops',
+              template: 'Something wrong here. Please try again.'
+            });
+
+            alertPopup.then(function() {
+              var geoLocation = {
+                lat: $scope.currentLocation.coords.latitude,
+                lng: $scope.currentLocation.coords.longitude
+              };
+              centerMyLocation();
+              getOrders(geoLocation);
+            });
+          };
+        });
+    };
+
 
     $scope.$on('$ionicView.afterEnter', function() {
       // get orders around me

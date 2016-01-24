@@ -7,27 +7,45 @@
  * # TasksController
  */
 angular.module('MyApp')
-  .controller('TasksController', function($scope, $stateParams,
-    OrderService, $ionicLoading, $sessionStorage) {
+  .controller('TasksController', function($scope,
+    OrderService, $ionicLoading, $localStorage, $state, $ionicHistory) {
     // do something with $scope
-    $scope.userId = $sessionStorage.get('userid');
     $ionicLoading.show({
       template: 'Loading...'
     });
-    OrderService.getOrdersForUser($scope.userId)
-      .success(function(data) {
-        $ionicLoading.hide();
-        data.forEach(function(element) {
-          element.currentStatus = getStatus(element.status);
-          element.category = getOrderType(element.orderType);
+
+    $scope.loadTasks = function() {
+      OrderService.getOrdersForUser($scope.userId)
+        .success(function(data) {
+          $ionicLoading.hide();
+          data.forEach(function(element) {
+            element.currentStatus = getStatus(element.status);
+            element.category = getOrderType(element.orderType);
+          });
+          $scope.orders = data;
+          $scope.$broadcast('scroll.refreshComplete');
+        })
+        .error(function(error) {
+          // display alert
+          $ionicLoading.hide();
+          $scope.$broadcast('scroll.refreshComplete');
+          alert('an error occured', error);
         });
-        $scope.orders = data;
-      })
-      .error(function(error) {
-        // display alert
-        $ionicLoading.hide();
-        alert('an error occured', error);
+    };
+
+    $scope.$on('$ionicView.enter', function() {
+      $scope.loadTasks();
+    });
+
+    $scope.goToTaskDetail = function(index) {
+      $localStorage.setObject('taskDetail', $scope.orders[index]);
+      $ionicHistory.nextViewOptions({
+        disableAnimate: false,
+        disableBack: false,
+        historyRoot: false
       });
+      $state.go('app.taskdetail');
+    };
 
     function getStatus(statusId) {
       if (statusId === 1) {

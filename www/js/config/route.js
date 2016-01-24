@@ -53,8 +53,8 @@ angular.module('MyApp')
       }
     })
     .state('app.confirmOrder', {
-      url: '/confirmOrder/:orderId',
-      cache: true,
+      url: '/confirmOrder',
+      cache: false,
       views: {
         'viewContent': {
           templateUrl: 'templates/views/confirmOrder.html',
@@ -79,6 +79,16 @@ angular.module('MyApp')
         'viewContent': {
           templateUrl: 'templates/views/tasks.html',
           controller: 'TasksController'
+        }
+      }
+    })
+    .state('app.taskdetail', {
+      url: '/taskdetail',
+      cache: false,
+      views: {
+        'viewContent': {
+          templateUrl: 'templates/views/taskdetail.html',
+          controller: 'TaskDetailController'
         }
       }
     });

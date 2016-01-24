@@ -5,12 +5,17 @@
   </ion-header-bar>
 
   <ion-content class="tasks-main">
-    <div class="card" ng-repeat="order in orders">
+  <ion-refresher
+    pulling-text="Pull to refresh..."
+    on-refresh="loadTasks()">
+  </ion-refresher>
+  <div class="cards-list">
+    <div class="card" ng-repeat="order in orders track by $index" ng-click="goToTaskDetail($index)" >
       <div class="item item-divider">
         <div class="row">
           <div class="col col-50 order-id" ng-class="{'status-orange' : order.status == 1,
                       'status-red' : order.status == 2,
-                      'status-blue' : order.status > 2}">
+                      'status-green' : order.status > 2}">
             {{order.currentStatus}}
           </div>
           <div class="col col-50 price">
@@ -44,14 +49,15 @@
           </div>
         </div>
       </div>
-      <div class="item item-divider">
+      <!-- <div class="item item-divider">
         <div class="button-bar">
-          <a class="button">Operation 1</a>
-          <a class="button">Operation 2</a>
-          <a class="button">Operation 3</a>
+          <button class="button button-positive" ng-if="order.status === 1">I have picked it up</button>
+          <button class="button button-positive" ng-if="order.status === 2">I have delivered it</button>
         </div>
-      </div>
+      </div> -->
     </div>
+  </div>
+
   </ion-content>
 
 </ion-view>
