@@ -82,6 +82,16 @@ angular.module('MyApp')
         }
       }
     })
+    .state('app.map', {
+      url: '/map',
+      cache: false,
+      views: {
+        'viewContent': {
+          templateUrl: 'templates/views/map.html',
+          controller: 'MapController'
+        }
+      }
+    })
     .state('app.taskdetail', {
       url: '/taskdetail',
       cache: false,

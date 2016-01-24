@@ -9,7 +9,7 @@
 angular.module('MyApp')
   .controller('TaskDetailController', function($scope, $stateParams,
     OrderService, $ionicLoading, $localStorage, $ionicHistory,
-    $ionicPopup) {
+    $ionicPopup, $state) {
     // do something with $scope
     $scope.order = $localStorage.getObject('taskDetail');
 
@@ -37,6 +37,34 @@ angular.module('MyApp')
 
     addDetailForScopeOrder();
 
+    $scope.goBack = function() {
+      $ionicHistory.nextViewOptions({
+        disableAnimate: true,
+        disableBack: true,
+        historyRoot: true
+      });
+      $state.go('app.tasks');
+    };
+
+    $scope.viewOnMap = function(id) {
+      var data = {};
+      if (id === 'from') {
+        data.from = $scope.order.fromAddress;
+      } else if (id === 'to') {
+        data.to = $scope.order.toAddress;
+      } else {
+        data.from = $scope.order.fromAddress;
+        data.to = $scope.order.toAddress;
+      }
+      $localStorage.setObject('mapLocations', data);
+      $ionicHistory.nextViewOptions({
+        disableAnimate: false,
+        disableBack: false,
+        historyRoot: false
+      });
+      $state.go('app.map');
+    };
+
     $scope.pickUpOrder = function() {
       $ionicLoading.show({
         template: 'Updating...'
@@ -45,6 +73,7 @@ angular.module('MyApp')
         .success(function(data) {
           $scope.order.status = 2;
           $scope.order.currentStatus = 'On delivery';
+          $localStorage.setObject('taskDetail', $scope.order);
           $ionicLoading.hide();
         })
         .error(function(error) {
@@ -66,9 +95,9 @@ angular.module('MyApp')
       });
       OrderService.updateOrderStatus($scope.order.orderId, 'delivered', 3)
         .success(function(data) {
-          console.log(data);
           $scope.order.status = 3;
           $scope.order.currentStatus = 'Delivered';
+          $localStorage.setObject('taskDetail', $scope.order);
           $ionicLoading.hide();
         })
         .error(function(error) {

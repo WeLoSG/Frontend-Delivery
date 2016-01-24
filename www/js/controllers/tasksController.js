@@ -13,7 +13,7 @@ angular.module('MyApp')
     $ionicLoading.show({
       template: 'Loading...'
     });
-
+    console.log($ionicHistory.viewHistory());
     $scope.loadTasks = function() {
       OrderService.getOrdersForUser($scope.userId)
         .success(function(data) {

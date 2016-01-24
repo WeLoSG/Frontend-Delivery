@@ -61,7 +61,6 @@
     }
 
     .address {
-      margin-top: 20px;
       .title {
         color: grey;
       }
@@ -71,6 +70,10 @@
         & > div {
           margin-top: 10px;
         }
+      }
+      .map-link {
+        padding: 15px;
+        text-align: center;
       }
     }
 
@@ -86,6 +89,7 @@
   }
 
   .footer {
+    padding: 20px 0;
      width: 100%;
       margin-top: 20px;
      .button-confirm {
