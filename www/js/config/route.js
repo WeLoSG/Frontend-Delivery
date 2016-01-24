@@ -14,7 +14,7 @@ angular.module('MyApp')
     })
     .state('app.login', {
       url: '/login',
-      cache: true,
+      cache: false,
       views: {
         'viewContent': {
           templateUrl: 'templates/views/login.html',
@@ -24,7 +24,7 @@ angular.module('MyApp')
     })
     .state('app.register', {
       url: '/register',
-      cache: true,
+      cache: false,
       views: {
         'viewContent': {
           templateUrl: 'templates/views/register.html',
