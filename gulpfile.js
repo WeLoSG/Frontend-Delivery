@@ -12,6 +12,7 @@ var paths = {
   js: [
     './www/**/*.js',
     '!./www/js/app.js',
+    '!./www/js/cordova.js',
     '!./www/lib/**'
   ],
 };

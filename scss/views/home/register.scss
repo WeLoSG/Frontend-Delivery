@@ -1,9 +1,6 @@
 .register-sub-header {
 	width: 100%;
 	text-align: center;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
 	background: $positive;
 
 	.register-main {
@@ -11,7 +8,7 @@
 		    font-size: 1.8em;
 		    color: white;
         margin: 10%;
-        
+
 		    .title-icon {
 		    	font-size: 3em;
 		    }
