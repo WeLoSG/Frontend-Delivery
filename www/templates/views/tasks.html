@@ -29,7 +29,10 @@
             From
           </div>
           <div class="detail">
-            {{order.fromAddress.extra}}, {{order.fromAddress.street}}, {{order.fromAddress.postal}}
+            <span ng-if="order.fromAddress.extra">
+              {{order.fromAddress.extra}},
+            </span>
+            {{order.fromAddress.street}}, {{order.fromAddress.postal}}
           </div>
         </div>
         <div class="address">
@@ -37,7 +40,10 @@
             To
           </div>
           <div class="detail">
-            {{order.toAddress.extra}}, {{order.toAddress.street}}, {{order.toAddress.postal}}
+            <span ng-if="order.toAddress.extra">
+              {{order.toAddress.extra}},
+            </span>
+            {{order.toAddress.street}}, {{order.toAddress.postal}}
           </div>
         </div>
         <div class="category">

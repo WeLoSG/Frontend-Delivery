@@ -5,6 +5,14 @@
   </ion-header-bar>
 
   <ion-content>
+    <div class="user-avatar">
+      <div class="avatar">
+        <img src="img/user.png" alt="" />
+      </div>
+      <div class="title">
+        {{user.name}}
+      </div>
+    </div>
     <div class="list">
       <div class="item item-divider">
       </div>
@@ -12,13 +20,13 @@
       <a class="item item-icon-left" href="#">
         <i class="icon ion-email"></i> Email
         <span class="item-note">
-          test@example.com
+          {{user.email}}
         </span>
       </a>
       <a class="item item-icon-left" href="#">
         <i class="icon ion-ios-telephone"></i>Contact
         <span class="item-note">
-          88888888
+          {{user.phone}}
         </span>
 
       </a>

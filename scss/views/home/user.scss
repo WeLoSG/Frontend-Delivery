@@ -1,0 +1,14 @@
+.user-avatar {
+  padding: 20px;
+  text-align: center;
+  .title {
+    font-size: 18px;
+  }
+
+  .avatar {
+    img {
+      height: 100px;
+      width: 100px;
+    }
+  }
+}

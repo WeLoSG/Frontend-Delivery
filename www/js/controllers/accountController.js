@@ -9,7 +9,9 @@
 angular.module('MyApp')
   .controller('AccountController', function($scope, $state, $localStorage,
     $ionicHistory) {
-    // do something with $scope
+
+    $scope.user = $localStorage.getObject('user');
+
     $scope.logout = function() {
       $localStorage.remove('token');
       $localStorage.remove('user');
