@@ -8,12 +8,19 @@
  */
 angular.module('MyApp')
   .controller('LoginController', function($scope, $state, $ionicHistory,
-    $localStorage, UserService) {
+    $localStorage, UserService, $ionicPopup) {
 
     $scope.credential = {
       email: '',
       password: '',
       isDriver: true
+    };
+
+    $scope.showAlert = function(text) {
+      $ionicPopup.alert({
+        title: 'Oops',
+        template: text
+      });
     };
 
     $scope.userLogin = function() {
@@ -29,11 +36,11 @@ angular.module('MyApp')
             $localStorage.setObject('user', data.user);
             $state.go('app.home');
           } else {
-            console.log('login failed');
+            $scope.showAlert('Please check your email and password.');
           }
         })
         .error(function(error) {
-          console.log(error);
+          $scope.showAlert('Login Failed! <br>Please try again.');
         });
     };
 
