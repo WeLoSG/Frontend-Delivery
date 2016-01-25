@@ -45,7 +45,9 @@
             {{order.fromAddress.street}}, {{order.fromAddress.postal}}
           </div>
         </div>
-        <a href="http://maps.apple.com?daddr={{order.fromAddress.geoLocation.lat}},{{order.fromAddress.geoLocation.lng}}" target="_blank">View On Map</a>
+        <!-- <div>
+          <a href="http://maps.apple.com?daddr={{order.fromAddress.geoLocation.lat}},{{order.fromAddress.geoLocation.lng}}" target="_blank">View on map</a>
+        </div> -->
       </div>
       <div class="address">
         <div class="title">
@@ -59,6 +61,9 @@
             {{order.toAddress.street}}, {{order.toAddress.postal}}
           </div>
         </div>
+        <!-- <div>
+          <a href="http://maps.apple.com?daddr={{order.fromAddress.geoLocation.lat}},{{order.fromAddress.geoLocation.lng}}" target="_blank">View on map</a>
+        </div> -->
       </div>
       <div class="field">
         <div class="title">
@@ -80,16 +85,16 @@
 
     <div class="footer">
       <div class="row no-padding">
-        <div class="col col-50 no-padding">
+        <div class="col col-100 no-padding">
           <button class="button footer-button-left button-square button-positive" ng-click="goToTasks()">
             VIEW MY TASKS
           </button>
         </div>
-        <div class="col col-50 no-padding">
+        <!-- <div class="col col-50 no-padding">
           <button class="button footer-button-right button-square button-positive">
             UPDATE THIS TASK
           </button>
-        </div>
+        </div> -->
       </div>
     </div>
   </ion-content>
